@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import inspect
-from sympy import symbols
+import sympy as sp
 
 # Definimos la función
-x = symbols('x')
-f = x**2 - 2*x + 3
+x = sp.Symbol('x')
+e = sp.E
+f = 1 / (1 + e**(-x))
 
 # Creamos un rango de valores para x
 x_range = np.linspace(-10, 10, 1000)
@@ -38,7 +38,7 @@ ax.grid(which='major', linestyle='-', linewidth='0.5', color='black')
 ax.grid(which='minor', linestyle='--', linewidth='0.2', color='red')
 
 # Obtenemos la definición de la función en lenguaje matemático
-definicion_funcion = r'${}$'.format(f)
+definicion_funcion = r'${}$'.format(sp.latex(f))
 
 # Configuramos los ejes y el título
 plt.xlabel('x')
