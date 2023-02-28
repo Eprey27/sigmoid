@@ -1,25 +1,26 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import inspect
+from sympy import symbols
 
 # Definimos la función
-def f(x):
-    return x**2 - 2*x + 3
+x = symbols('x')
+f = x**2 - 2*x + 3
 
 # Creamos un rango de valores para x
-x = np.linspace(-10, 10, 1000)
+x_range = np.linspace(-10, 10, 1000)
 
 # Evaluamos la función en cada valor de x
-y = f(x)
+y = np.array([f.subs(x, i) for i in x_range])
 
 # Creamos la gráfica
 fig, ax = plt.subplots()
-ax.plot(x, y)
+ax.plot(x_range, y)
 
 # Creamos un arreglo de ubicaciones de subejes más delgados en el eje x
 x_minor_ticks = np.arange(-120, 120, 5)
 
-# Creamos un arreglo de ubicaciones de subejes más delgados en el eje x
+# Creamos un arreglo de ubicaciones de subejes más delgados en el eje y
 y_minor_ticks = np.arange(-120, 120, 5)
 
 # Establecemos las ubicaciones de los subejes más delgados en el eje x e y
@@ -36,13 +37,13 @@ ax.spines['top'].set_color('none')
 ax.grid(which='major', linestyle='-', linewidth='0.5', color='black')
 ax.grid(which='minor', linestyle='--', linewidth='0.2', color='red')
 
-# Obtenemos la definición de la función
-definicion_funcion = inspect.getsource(f)
+# Obtenemos la definición de la función en lenguaje matemático
+definicion_funcion = r'${}$'.format(f)
 
 # Configuramos los ejes y el título
 plt.xlabel('x')
 plt.ylabel('y')
-plt.title('Gráfica de la función {0}'.format(definicion_funcion))
+plt.title('Gráfica de la función\n{}'.format(definicion_funcion))
 
 # Configuramos la relación de aspecto de los ejes
 ax.set_aspect('equal')
